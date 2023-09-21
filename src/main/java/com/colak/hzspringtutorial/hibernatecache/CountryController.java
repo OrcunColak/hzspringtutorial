@@ -7,6 +7,7 @@ import jakarta.persistence.QueryHint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.QueryHints;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +30,12 @@ public class CountryController {
 
     @Autowired
     HazelcastInstance hazelcastInstance;
+
+    @Scheduled(fixedRate = 2000)
+    public void queryWhereIdLess() {
+        countryRepository.findAll();
+        countryRepository.findById(10);
+    }
 
     // http://localhost:8080/api/country/findAll
     @GetMapping(path = "/findAll")

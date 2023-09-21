@@ -3,3 +3,12 @@ hazelcast:
     join:
       multicast:
         enabled: true
+  map:
+    default:
+      backup-count: 1
+      in-memory-format: OBJECT
+      time-to-live-seconds: 10
+      eviction:
+        eviction-policy: LRU
+        max-size-policy: USED_HEAP_PERCENTAGE
+        size: 10
