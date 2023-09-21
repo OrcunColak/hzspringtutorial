@@ -1,4 +1,4 @@
-package com.colak.hzspringtutorial.workercache;
+package com.colak.hzspringtutorial.springcache;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

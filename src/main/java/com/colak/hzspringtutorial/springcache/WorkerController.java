@@ -1,4 +1,4 @@
-package com.colak.hzspringtutorial.workercache;
+package com.colak.hzspringtutorial.springcache;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/worker")
 @Slf4j
-public class CachingControllerDemo {
+public class WorkerController {
 
     private static final String WORKER_CACHE = "workers";
     private final ArrayList<Worker> workerList = new ArrayList<>(List.of(new Worker(0, "worker0")));
