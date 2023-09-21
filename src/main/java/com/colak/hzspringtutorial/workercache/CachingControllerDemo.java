@@ -16,34 +16,39 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/worker")
 @Slf4j
-public class MyWorkerController {
+public class CachingControllerDemo {
 
     private static final String WORKER_CACHE = "workers";
-    private final ArrayList<Worker> workerList = new ArrayList<>(List.of(new Worker(0, "worker1")));
+    private final ArrayList<Worker> workerList = new ArrayList<>(List.of(new Worker(0, "worker0")));
 
-    // http://localhost:8080/api/worker/findAll
-    @Cacheable(WORKER_CACHE)
-    @GetMapping(path = "/findAll")
-    public List<Worker> findAll() {
-        log.info("findAll");
-        return workerList;
-    }
 
-    @Cacheable(value = WORKER_CACHE, key = "#id")
-    @GetMapping(path = "/findByIndex")
-    public Optional<Worker> findByIndex(int id) {
-        log.info("findByIndex");
+    // The returned Worker is cached and findById() is not called again
+    @Cacheable(value = WORKER_CACHE)
+    @GetMapping(path = "/findById")
+    public Optional<Worker> findById(int id) {
+        log.info("findById");
         return workerList.stream()
                 .filter(w -> w.getId() == id)
                 .findFirst();
 
     }
 
+    // The updated Worker is cached and findById() is not called again
     @CachePut(value = WORKER_CACHE, key = "#id")
-    @PostMapping(path = "/replaceWorker")
-    public void replaceWorker(int id, Worker worker) {
-        log.info("replaceWorker");
+    @PostMapping(path = "/updateById")
+    public Worker updateById(int id, Worker worker) {
+        log.info("replaceById");
         workerList.removeIf(w -> worker.getId() == id);
         workerList.add(worker);
+        return worker;
+    }
+
+    // The new Worker is cached and findById() is not called again
+    @CachePut(value = WORKER_CACHE, key = "#id")
+    @PostMapping(path = "/addWorker")
+    public Worker addWorker(int id, Worker worker) {
+        log.info("addWorker");
+        workerList.add(worker);
+        return worker;
     }
 }

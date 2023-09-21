@@ -24,6 +24,7 @@ public class HzSpringTutorialApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        // just test if we can populate a map
         IMap<Long, String> map = hazelcastInstance.getMap("data");
         for (long i = 0; i < 10; i++) {
             String value = map.get(i);
