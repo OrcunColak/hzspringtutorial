@@ -17,7 +17,7 @@ import java.util.Objects;
 @Table(name = "countries")
 @Entity
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region="country")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "country")
 public class Country {
 
     @Id
