@@ -4,6 +4,15 @@ hazelcast:
       multicast:
         enabled: true
   map:
+#    spring:session:sessions:
+#      attributes:
+#        principalName:
+#          extractor-class-name: org.springframework.session.hazelcast.PrincipalNameExtractor
+#      indexes:
+#        - type: HASH
+#          attributes:
+#            - "principalName"
+
     default:
       backup-count: 1
       in-memory-format: OBJECT
@@ -12,3 +21,4 @@ hazelcast:
         eviction-policy: LRU
         max-size-policy: USED_HEAP_PERCENTAGE
         size: 10
+
