@@ -4,14 +4,14 @@ hazelcast:
       multicast:
         enabled: true
   map:
-#    spring:session:sessions:
-#      attributes:
-#        principalName:
-#          extractor-class-name: org.springframework.session.hazelcast.PrincipalNameExtractor
-#      indexes:
-#        - type: HASH
-#          attributes:
-#            - "principalName"
+    spring:session:sessions:
+      attributes:
+        principalName:
+          extractor-class-name: org.springframework.session.hazelcast.PrincipalNameExtractor
+      indexes:
+        - type: HASH
+          attributes:
+            - principalName
 
     default:
       backup-count: 1
